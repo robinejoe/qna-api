@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "node --experimental-modules src/index.js",
+    "dev": "node --experimental-modules --es-module-specifier-resolution=node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +18,5 @@
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
     "nodemon": "^2.0.6"
-  },
-  "type": "module"
+  }
 }
