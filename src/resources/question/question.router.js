@@ -1,10 +1,9 @@
 import Router from 'express'
+import { getQuestions, createQuestion } from './question.controllers'
 
 const questionRouter = Router()
 
-questionRouter.get('/', (req, res) => {
-    res.status(200).json({ message: 'hello' })
-})
+questionRouter.get('/', getQuestions)
 
 questionRouter.get('/:id', (req, res) => {
     res.status(200).json({ id: req.params.id })
@@ -14,8 +13,18 @@ questionRouter.get('/categories/:categoryid', (req, res) => {
     res.status(200).json({ categoryId: req.params.categoryid })
 })
 
-questionRouter.post('/', (req, res) => {
-    res.status(201).json(req.body)
+questionRouter.post('/', createQuestion)
+
+questionRouter.put('/:id', (req, res) => {
+    res.status(200).json({ id: req.params.id })
+})
+
+questionRouter.delete('/:id', (req, res) => {
+    res.status(200).json({ id: req.params.id })
+})
+
+questionRouter.get('/:id/comments', (req, res) => {
+    res.status(200).json({ id: req.params.id })
 })
 
 export default questionRouter
