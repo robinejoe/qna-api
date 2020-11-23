@@ -1,27 +1,19 @@
 import Router from 'express'
-import { getQuestions, createQuestion } from './question.controllers'
+import { getQuestions, createQuestion, getQuestionById, getQuestionsByCategory, updateQuestion, deleteQuestion } from './question.controllers'
 
 const questionRouter = Router()
 
 questionRouter.get('/', getQuestions)
 
-questionRouter.get('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+questionRouter.get('/:id', getQuestionById)
 
-questionRouter.get('/categories/:categoryid', (req, res) => {
-    res.status(200).json({ categoryId: req.params.categoryid })
-})
+questionRouter.get('/categories/:categoryid', getQuestionsByCategory)
 
 questionRouter.post('/', createQuestion)
 
-questionRouter.put('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+questionRouter.put('/:id', updateQuestion)
 
-questionRouter.delete('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+questionRouter.delete('/:id', deleteQuestion)
 
 questionRouter.get('/:id/comments', (req, res) => {
     res.status(200).json({ id: req.params.id })
