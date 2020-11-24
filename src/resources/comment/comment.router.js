@@ -1,18 +1,14 @@
 import Router from 'express'
+import { createComment, updateCommentById, deleteCommentById } from './comment.controllers'
+
 
 const commentRouter = Router()
 
-commentRouter.post('/', (req, res) => {
-    res.status(201).json(req.body)
-})
+commentRouter.post('/', createComment)
 
-commentRouter.put('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+commentRouter.put('/:id', updateCommentById)
 
-commentRouter.delete('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+commentRouter.delete('/:id', deleteCommentById)
 
 export default commentRouter
 

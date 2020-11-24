@@ -6,3 +6,5 @@ const commentSchema = new Schema({
     user: String,
     content: String
 }, { timestamps: true });
+
+export const Comment = mongoose.model('comment', commentSchema)

@@ -1,5 +1,5 @@
 import Router from 'express'
-import { getQuestions, createQuestion, getQuestionById, getQuestionsByCategory, updateQuestion, deleteQuestion } from './question.controllers'
+import { getQuestions, createQuestion, getQuestionById, getQuestionsByCategory, updateQuestion, deleteQuestion, getCommentsByQuestionId } from './question.controllers'
 
 const questionRouter = Router()
 
@@ -15,10 +15,6 @@ questionRouter.put('/:id', updateQuestion)
 
 questionRouter.delete('/:id', deleteQuestion)
 
-questionRouter.get('/:id/comments', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+questionRouter.get('/:id/comments', getCommentsByQuestionId)
 
 export default questionRouter
-
-//callback functions above are placeholders and will be replaced with controllers

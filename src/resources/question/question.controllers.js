@@ -1,9 +1,12 @@
 import Router from 'express'
 import { Question } from '../../models/question'
+import { Comment } from '../../models/comment'
 import mongoose from 'mongoose'
 
 export const getQuestions = async (req, res) => {
     const questions = await Question.find()
+        .populate('category')
+        .exec()
     res.send(questions)
 }
 
@@ -23,6 +26,8 @@ export const getQuestionById = async (req, res) => {
         return res.status(400).end()
     }
     const question = await Question.findOne({_id: req.params.id})
+        .populate('category')
+        .exec()
     if(question === null) {
         return res.status(404).end()
     }
@@ -60,8 +65,11 @@ export const deleteQuestion = async (req, res) => {
         {
             _id: req.params.id
         })
-    if (!removed) {
-        return res.status(400).end()
-    }
-    res.status(200).json({ data: removed })
+    res.status(204).json()
 } 
+
+export const getCommentsByQuestionId = async (req, res) => {
+    const comments = await Comment.find({questionId: req.params.id})
+    res.send(comments)
+}
+

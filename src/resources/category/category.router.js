@@ -1,27 +1,17 @@
 import Router from 'express'
+import { getCategories, getCategoryById, createCategory, updateCategoryById, deleteCategoryById } from './category.controllers'
+
 
 const categoryRouter = Router()
 
-categoryRouter.get('/', (req, res) => {
-    res.status(200).json({ message: 'hello' })
-})
+categoryRouter.get('/', getCategories)
 
-categoryRouter.get('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+categoryRouter.get('/:id', getCategoryById)
 
-categoryRouter.post('/', (req, res) => {
-    res.status(201).json(req.body)
-})
+categoryRouter.post('/', createCategory)
 
-categoryRouter.put('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+categoryRouter.put('/:id', updateCategoryById)
 
-categoryRouter.delete('/:id', (req, res) => {
-    res.status(200).json({ id: req.params.id })
-})
+categoryRouter.delete('/:id', deleteCategoryById)
 
 export default categoryRouter
-
-//callback functions above are placeholders and will be replaced with controllers
