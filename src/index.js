@@ -4,13 +4,15 @@ import questionRouter from './resources/question/question.router'
 import commentRouter from './resources/comment/comment.router'
 import categoryRouter from './resources/category/category.router'
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 mongoose
     .connect("mongodb://localhost:27017/q-and-a-app", { useNewUrlParser: true })
     .then(() => {
         const app = express()
-        const SERVER_PORT = 3000
+        const SERVER_PORT = 3001
         
+        app.use(cors())
         app.use(bodyParser.json())
         
         app.use('/api/questions', questionRouter)
