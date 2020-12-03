@@ -7,7 +7,7 @@ questionRouter.get('/', getQuestions)
 
 questionRouter.get('/:id', getQuestionById)
 
-questionRouter.get('/categories/:categoryid', getQuestionsByCategory)
+questionRouter.get('/categories/:category', getQuestionsByCategory)
 
 questionRouter.post('/', createQuestion)
 

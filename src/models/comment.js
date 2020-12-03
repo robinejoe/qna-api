@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const commentSchema = new Schema({
-    questionId: Schema.Types.ObjectId,
+export const commentSchema = new Schema({
+    questionId: { type: Schema.Types.ObjectId, ref: 'question' },
     user: String,
     content: String
 }, { timestamps: true });

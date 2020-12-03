@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { categorySchema } from './category'
+
 const { Schema } = mongoose;
 
 const questionSchema = new Schema({

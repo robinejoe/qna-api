@@ -1,5 +1,6 @@
 import Router from 'express'
 import { Question } from '../../models/question'
+import { Category } from '../../models/category'
 import { Comment } from '../../models/comment'
 import mongoose from 'mongoose'
 
@@ -11,14 +12,18 @@ export const getQuestions = async (req, res) => {
 }
 
 export const createQuestion = async (req, res) => {
-    const question = new Question({
-        user: req.body.user,
-        category: req.body.category,
-        title: req.body.title,
-        description: req.body.description
-    })
-    await question.save()
-    res.send(question)
+    const category = await Category.findOne({name: req.body.category}).exec()
+    if(category !== undefined) {
+        const question = new Question({
+            user: req.body.user,
+            category: category._id,
+            title: req.body.title,
+            description: req.body.description
+        })
+        await question.save()
+        res.send(question)
+    }
+    res.status(400).end()
 }
 
 export const getQuestionById = async (req, res) => {
@@ -35,7 +40,10 @@ export const getQuestionById = async (req, res) => {
 }
 
 export const getQuestionsByCategory = async (req, res) => {
-    const questions = await Question.find({category: req.params.categoryid})
+    const category = await Category.findOne({name: req.params.category})
+    const questions = await Question.find({category: category._id})
+        .populate('category')
+        .exec()
     res.send(questions)
 }
 
