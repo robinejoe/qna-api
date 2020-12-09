@@ -59,6 +59,8 @@ export const updateQuestion = async (req, res) => {
             req.body,
             { new: true }
         )
+        .populate('category')
+        .exec()
         if (!updatedQuestion) {
             return res.status(400).end()
         }
